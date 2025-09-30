@@ -1,3 +1,4 @@
+<?php
 namespace Pwd\SmsNotificationChannel\Services;
 
 use Illuminate\Support\Facades\Log;
