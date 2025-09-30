@@ -3,6 +3,7 @@
 namespace Pwd\SmsNotificationChannel;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Notification;
 use Pwd\SmsNotificationChannel\Services\SmsInterface;
 use Pwd\SmsNotificationChannel\Services\SmsGatewayHubService;
 use Pwd\SmsNotificationChannel\Services\LocalSmsService;
@@ -22,6 +23,8 @@ class SmsNotificationChannelServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //
+        Notification::extend('sms', function ($app) {
+            return $app->make(SmsChannel::class);
+        }); 
     }
 }
