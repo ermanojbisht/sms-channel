@@ -13,7 +13,7 @@ class SmsNotificationChannelServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(SmsInterface::class, function ($app) {
-            if (config('app.env') === 'production') {
+           if (config('app.env') === 'production' || config('site.sms_testing_in_real_channel') === true) {
                 return new SmsGatewayHubService();
             } else {
                 return new LocalSmsService();
