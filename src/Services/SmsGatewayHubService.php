@@ -23,7 +23,7 @@ class SmsGatewayHubService implements SmsInterface
         $this->entityId = config('services.smsgatewayhub.entityId');
     }
 
-    public function sendMsg($phone_number, $message, $templateId)
+    public function sendMsg($phone_number, $message, $templateId, $language = 'english')
     {
         if (empty($this->apiUrl) || empty($this->apiKey)) {
             Log::error('SmsGatewayHub service is not configured. Please check your .env file.');
@@ -39,7 +39,7 @@ class SmsGatewayHubService implements SmsInterface
                     'APIkey' => $this->apiKey,
                     'SenderId' => $this->senderId,
                     'Channel' => '2',
-                    'DCS' => '0',
+                    'DCS' => ($language === 'hindi') ? '8' : '0',
                     'SchedTime' => null,
                     'GroupId' => null,
                     'EntityId' => $this->entityId,

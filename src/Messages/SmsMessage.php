@@ -14,6 +14,8 @@ class SmsMessage
 
     protected $to;
 
+    protected $language = 'english';
+
     public function __construct($lines = [])
     {
         $this->lines = $lines;
@@ -38,6 +40,13 @@ class SmsMessage
     public function line($line = ''): self
     {
         $this->lines[] = $line;
+
+        return $this;
+    }
+
+    public function language(string $language): self
+    {
+        $this->language = $language;
 
         return $this;
     }
@@ -87,6 +96,6 @@ class SmsMessage
         }
 
         $text = $this->getContent();
-        $smsService->sendMsg($this->to, $text, $this->templateId);
+        $smsService->sendMsg($this->to, $text, $this->templateId, $this->language);
     }
 }
